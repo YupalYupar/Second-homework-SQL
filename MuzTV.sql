@@ -54,4 +54,10 @@ CREATE TABLE IF NOT EXISTS Track_collection
    track_id INTEGER NOT NULL REFERENCES Music_tracks(id),
    collection_id INTEGER NOT NULL REFERENCES Collections(id),
    CONSTRAINT track_collection_pk PRIMARY KEY (track_id,collection_id)
+   
 );
+ALTER TABLE Collections
+ADD tracks VARCHAR(31) NOT NULL;
+
+ALTER TABLE Music_tracks 
+DROP COLUMN album;
