@@ -34,11 +34,13 @@ FROM Music_albums JOIN music_tracks
 ON Music_albums.id = music_tracks.album_id
 GROUP BY Music_albums.name;
 
-SELECT musicians.name
+
+SELECT name FROM musicians
+WHERE name NOT IN (SELECT musicians.name
 FROM musicians JOIN Music_albums
 ON musicians.name = Music_albums.musician
-WHERE Music_albums.date < '1970/01/01' OR Music_albums.date > '1979/12/31'
-GROUP BY musicians.name;
+WHERE Music_albums.date > '1970/01/01' AND Music_albums.date < '1979/12/31');
+
 
 SELECT collections.name
 FROM collections JOIN music_tracks
@@ -47,8 +49,8 @@ JOIN music_albums
 ON music_tracks.album_id = music_albums.id
 JOIN musicians
 ON music_albums.musician = musicians."name"
-WHERE musicians.name = 'Eminem'
-GROUP BY collections.name;
+WHERE musicians.name = 'Eminem';
+
 
 SELECT music_albums.name, COUNT(musicians.genre)
 FROM music_albums JOIN musicians
